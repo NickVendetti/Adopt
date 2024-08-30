@@ -48,7 +48,14 @@
         </p>
         <p><button type="submit">Add Pet</button></p>
     </form>
-
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div>
+            {{ form.photo.label }}
+            {{ form.photo() }}
+        </div>
+        <!-- Rest of the form fields -->
+    </form>
     <a href="{{ url_for('show_homepage') }}">Back to Homepage</a> 
 </body>
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Pet</title>
+</head>
+<body>
+    <h1>{{ pet.name }} ({{ pet.species }})</h1>
+
+    {% if pet.photo_url %}
+        <img src="{{ pet.photo_url }}" alt="Photo of {{ pet.name }}">
+    {% endif %}
+
+    <p>Age: {{ pet.age if pet.age else "Unknown" }}</p>
+
+    <form method="POST">
+        {{ form.csrf_token }}
+        <div>
+            {{ form.photo_url.label }}
+            {{ form.photo_url(size=32) }}
+        </div>
+        <div>
+            {{ form.notes.label }}
+            {{ form.notes(cols=32, rows=4) }}
+        </div>
+        <div>
+            {{ form.available.label }}
+            {{ form.available() }}
+        </div>
+        <button type="submit">Update Pet</button>
+    </form>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div>
+            {{ form.photo.label }}
+            {{ form.photo() }}
+        </div>
+        <!-- Rest of the form fields -->
+    </form>
+    <a href="{{ url_for('show_homepage') }}">Back to Homepage</a>
+</body>
+</html>
